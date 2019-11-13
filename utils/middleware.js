@@ -1,6 +1,6 @@
 const joi = require('joi')
 const passport = require('passport')
-const db = require('../database/models')
+const db = {}
 const {superError} = require('./error')
 // eslint-disable-next-line no-unused-vars
 const express = require('express')

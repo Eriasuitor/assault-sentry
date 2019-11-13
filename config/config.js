@@ -1,3 +1,5 @@
+const path = require('path')
+
 module.exports = {
   app: {
     port: 10086
@@ -17,5 +19,6 @@ module.exports = {
       collate: 'utf8mb4_unicode_ci'
     }
   },
+  dataFile: path.resolve('intelligences.json'),
   preference: {}
 }
