@@ -2,16 +2,24 @@ const fs = require('fs')
 const lodash = require('lodash')
 const config = require('../../config')
 
+let intelligences = syncIntelligences()
+
 /**
- * @param {{key: string, type: 'map' | 'boolean' | 'item', data: JSON}[]}
+ * @param {{key: string, type: string, data: JSON}[]} toAdd
  */
-exports.report = (intelligences) => {
-  const existed = exports.getIntelligences()
-  existed = lodash.concat(intelligences, existed)
-  existed = lodash.uniqBy(existed, 'key')
-  fs.writeFileSync(config.dataFile, JSON.stringify(existed))
+exports.report = (toAdd) => {
+  intelligences = lodash.concat(toAdd, intelligences)
+  intelligences = lodash.uniqBy(intelligences, 'key')
+  fs.writeFileSync(config.dataFile, JSON.stringify(intelligences))
 }
 
 exports.getIntelligences = () => {
-    return fs.readFileSync(config.dataFile).toJSON()
+  return intelligences
+}
+
+/**
+ * @return {any}
+ */
+function syncIntelligences() {
+  return JSON.parse(fs.readFileSync(config.dataFile).toString())
 }

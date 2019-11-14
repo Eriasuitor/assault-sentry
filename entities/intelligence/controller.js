@@ -13,5 +13,5 @@ exports.getIntelligences = async (req) => {
  * @param {express.request} req
  */
 exports.report = async (req) => {
-  return IntelligenceService.report()
+  return IntelligenceService.report(req.body)
 }

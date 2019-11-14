@@ -2,7 +2,7 @@ const path = require('path')
 
 module.exports = {
   app: {
-    port: 10086
+    port: 9878
   },
   jwt: {
     key: 'xxx',

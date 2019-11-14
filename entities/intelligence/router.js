@@ -1,7 +1,7 @@
 const joi = require('joi')
 const IntelligenceController = require('./controller')
-const { validateSchemas } = require('../../utils/middleware')
-const { IntelligenceSchema } = require('../../schema/intelligence')
+const {validateSchemas} = require('../../utils/middleware')
+const {IntelligenceSchema} = require('../../schema/intelligence')
 // eslint-disable-next-line no-unused-vars
 const express = require('express')
 
@@ -10,26 +10,26 @@ const express = require('express')
  */
 exports.router = (app) => {
   app.get(
-    '/intelligences',
-    validateSchemas({
-      schema: joi.any()
-    },
+      '/intelligences',
+      validateSchemas({
+        schema: joi.any()
+      },
       IntelligenceController.getIntelligences,
       {
-        schema: IntelligenceSchema()
+        schema: joi.array().items(IntelligenceSchema())
       }
-    )
+      )
   )
 
   app.post(
-    '/intelligences',
-    validateSchemas({
-      schema: IntelligenceSchema()
-    },
+      '/intelligences',
+      validateSchemas({
+        schema: joi.array().items(IntelligenceSchema())
+      },
       IntelligenceController.report,
       {
         schema: joi.any()
       }
-    )
+      )
   )
 }
